@@ -64,8 +64,8 @@ class BillProvider {
   Future<List<Bill>> getBillsByDate(String monthStr) async {
     await open();
 
-    List<Map> maps =
-        await db.query(tableBill, where: 'monthStr = ?', whereArgs: [monthStr]);
+    List<Map> maps = await db.query(tableBill,
+        where: 'monthStr = ?', whereArgs: [monthStr], orderBy: 'dateStr DESC');
 
     if (maps.length > 0) {
       return maps.map((v) => Bill.fromJson(v)).toList();
